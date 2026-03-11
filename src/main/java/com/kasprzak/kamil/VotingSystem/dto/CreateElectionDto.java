@@ -8,6 +8,6 @@ import java.util.List;
 
 @Builder
 public record CreateElectionDto(
-        @NotBlank String name,
-        @NotEmpty List<String> options
+        @NotBlank(message = "Voting name cannot be empty") String name,
+        @NotEmpty(message = "Voting options cannot be empty") List<String> options
 ) {}

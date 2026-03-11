@@ -6,6 +6,6 @@ import lombok.Builder;
 
 @Builder
 public record OptionDto(
-        @NotNull Long id,
-        @NotEmpty String name
+        Long id,
+        String name
 ) {}

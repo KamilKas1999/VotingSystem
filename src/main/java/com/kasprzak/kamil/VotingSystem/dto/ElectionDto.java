@@ -7,7 +7,7 @@ import java.util.List;
 
 @Builder
 public record ElectionDto(
-        @NotNull Long id,
-        @NotNull String name,
-        @NotNull List<OptionDto> options
+        Long id,
+        String name,
+        List<OptionDto> options
 ) {}

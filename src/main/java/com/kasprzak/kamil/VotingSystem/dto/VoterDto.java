@@ -6,8 +6,8 @@ import lombok.Builder;
 
 @Builder
 public record VoterDto(
-        @NotNull Long id,
-        @NotEmpty String name,
-        @NotEmpty String email,
-        @NotNull boolean blocked
+        Long id,
+        String name,
+        String email,
+        boolean blocked
 ) {}

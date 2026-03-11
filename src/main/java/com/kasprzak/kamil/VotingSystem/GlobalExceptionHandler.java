@@ -4,11 +4,14 @@ import com.kasprzak.kamil.VotingSystem.dto.ErrorResponse;
 import com.kasprzak.kamil.VotingSystem.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 class GlobalExceptionHandler {
@@ -46,6 +49,16 @@ class GlobalExceptionHandler {
     @ExceptionHandler(OptionNotBelongsToElectionException.class)
     public ResponseEntity<ErrorResponse> handleOptionNotBelongs (OptionNotBelongsToElectionException ex){
         return buildResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleValidationErrors(MethodArgumentNotValidException ex) {
+        String messages = ex.getBindingResult()
+                .getFieldErrors()
+                .stream()
+                .map(error -> error.getField() + ": " + error.getDefaultMessage())
+                .collect(Collectors.joining("; "));
+        return buildResponse(HttpStatus.BAD_REQUEST, messages);
     }
 
     private ResponseEntity<ErrorResponse> buildResponse (HttpStatus status, String message){
