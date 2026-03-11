@@ -10,11 +10,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.*;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -98,24 +100,25 @@ class VoterServiceImplTest {
     void shouldReturnAllVoters() {
 
         // given
-        var voter = Voter.builder()
-                .id(1L)
-                .name("name")
-                .email("email")
-                .blocked(false)
-                .build();
+        var expectedList = List.of(
+                new Voter(1L, "name", "email", false),
+                new Voter(2L, "name", "email", true)
+        );
 
-        when(voterRepository.findAll())
-                .thenReturn(List.of(voter));
+        Pageable pageable = PageRequest.of(0, 2);
+
+        Page<Voter> expectedPage = new PageImpl<>(expectedList, pageable, expectedList.size());
+
+        when(voterRepository.findAll(any(Pageable.class))).thenReturn(expectedPage);
 
         // when
-        List<VoterDto> result = voterService.getAllVoters();
+        Page<VoterDto> result = voterService.getAllVoters(pageable);
 
         // then
-        assertEquals(1, result.size());
-        assertEquals("name", result.getFirst().name());
-        assertEquals("email", result.getFirst().email());
-        assertFalse(result.getFirst().blocked());
+        assertEquals(2, result.getSize());
+        assertEquals("name", result.getContent().getFirst().name());
+        assertEquals("email", result.getContent().getFirst().email());
+        assertFalse(result.getContent().getFirst().blocked());
     }
 
     @Test

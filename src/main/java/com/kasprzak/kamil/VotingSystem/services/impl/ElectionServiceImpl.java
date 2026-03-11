@@ -9,6 +9,7 @@ import com.kasprzak.kamil.VotingSystem.repositories.ElectionRepository;
 import com.kasprzak.kamil.VotingSystem.services.ElectionService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class ElectionServiceImpl implements ElectionService {
     }
 
     @Override
+    @Transactional
     public List<ElectionDto> getAllElections() {
         return electionRepository.findAll()
                 .stream()

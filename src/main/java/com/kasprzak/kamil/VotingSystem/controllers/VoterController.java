@@ -5,6 +5,9 @@ import com.kasprzak.kamil.VotingSystem.dto.VoterDto;
 import com.kasprzak.kamil.VotingSystem.services.VoterService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,7 +35,10 @@ public class VoterController {
     }
 
     @GetMapping
-    public List<VoterDto> getAllVoters() {
-        return voterService.getAllVoters();
+    public Page<VoterDto> getAllVoters(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return voterService.getAllVoters(pageable);
     }
 }

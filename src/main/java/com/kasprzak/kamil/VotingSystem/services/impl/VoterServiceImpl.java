@@ -7,7 +7,10 @@ import com.kasprzak.kamil.VotingSystem.exceptions.VoterNotFoundException;
 import com.kasprzak.kamil.VotingSystem.repositories.VoterRepository;
 import com.kasprzak.kamil.VotingSystem.services.VoterService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -43,11 +46,9 @@ public class VoterServiceImpl implements VoterService {
     }
 
     @Override
-    public List<VoterDto> getAllVoters() {
-        return voterRepository.findAll()
-                .stream()
-                .map(this::buildVoterDto)
-                .toList();
+    public Page<VoterDto> getAllVoters(Pageable pageable) {
+        return voterRepository.findAll(pageable)
+                .map(this::buildVoterDto);
     }
 
     private VoterDto buildVoterDto(Voter e) {
@@ -60,6 +61,7 @@ public class VoterServiceImpl implements VoterService {
                 .build();
     }
 
+    @Transactional
     private void updateIsBlocked(Long id, boolean blocked) {
         Voter voter = voterRepository.findById(id)
                 .orElseThrow(() -> new VoterNotFoundException("Voter not found"));

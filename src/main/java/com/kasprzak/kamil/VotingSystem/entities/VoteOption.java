@@ -19,7 +19,7 @@ public class VoteOption extends Audit{
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "election_id", nullable = false)
     private Election election;
 }

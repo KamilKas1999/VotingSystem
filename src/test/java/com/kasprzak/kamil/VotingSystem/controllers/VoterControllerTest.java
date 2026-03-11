@@ -8,6 +8,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -74,15 +78,19 @@ class VoterControllerTest {
                 new VoterDto(2L, "name", "email", true)
         );
 
-        when(voterService.getAllVoters()).thenReturn(expectedList);
+        Pageable pageable = PageRequest.of(0, 2);
+
+        Page<VoterDto> expectedPage = new PageImpl<>(expectedList, pageable, expectedList.size());
+
+        when(voterService.getAllVoters(any())).thenReturn(expectedPage);
 
         // when
-        List<VoterDto> actualList = voterController.getAllVoters();
+        Page<VoterDto> actualList = voterController.getAllVoters(0,2);
 
         // then
-        assertEquals(2, actualList.size());
-        assertEquals(expectedList.getFirst().name(), actualList.getFirst().name());
-        assertEquals(expectedList.get(1).name(), actualList.get(1).name());
-        verify(voterService, times(1)).getAllVoters();
+        assertEquals(2, actualList.getSize());
+        assertEquals(expectedList.getFirst().name(), actualList.getContent().getFirst().name());
+        assertEquals(expectedList.get(1).name(), actualList.getContent().getLast().name());
+        verify(voterService, times(1)).getAllVoters(any());
     }
 }
