@@ -15,7 +15,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Vote {
+public class Vote extends Audit{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,7 +2,6 @@ package com.kasprzak.kamil.VotingSystem.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name = "voters")
@@ -11,7 +10,7 @@ import org.springframework.data.annotation.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Voter {
+public class Voter extends Audit{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
