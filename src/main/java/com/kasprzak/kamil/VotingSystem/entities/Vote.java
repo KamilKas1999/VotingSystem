@@ -10,6 +10,14 @@ import lombok.*;
                 columnNames = {"voter_id", "election_id"}
         )
 )
+@NamedEntityGraph(
+        name = "Vote.full",
+        attributeNodes = {
+                @NamedAttributeNode("voter"),
+                @NamedAttributeNode("election"),
+                @NamedAttributeNode("option")
+        }
+)
 @Getter
 @Setter
 @NoArgsConstructor
