@@ -1,4 +1,4 @@
-package com.kasprzak.kamil.VotingSystem.services.impl;
+package com.kasprzak.kamil.VotingSystem.unit.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,6 +11,7 @@ import com.kasprzak.kamil.VotingSystem.repositories.ElectionRepository;
 import com.kasprzak.kamil.VotingSystem.repositories.VoteOptionRepository;
 import com.kasprzak.kamil.VotingSystem.repositories.VoteRepository;
 import com.kasprzak.kamil.VotingSystem.repositories.VoterRepository;
+import com.kasprzak.kamil.VotingSystem.services.impl.VoteServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,7 +20,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)

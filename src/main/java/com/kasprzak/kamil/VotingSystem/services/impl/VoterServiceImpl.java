@@ -36,11 +36,13 @@ public class VoterServiceImpl implements VoterService {
     }
 
     @Override
+    @Transactional
     public void blockVoter(Long id) {
         updateIsBlocked(id, true);
     }
 
     @Override
+    @Transactional
     public void unblockVoter(Long id) {
         updateIsBlocked(id, false);
     }
@@ -61,7 +63,6 @@ public class VoterServiceImpl implements VoterService {
                 .build();
     }
 
-    @Transactional
     private void updateIsBlocked(Long id, boolean blocked) {
         Voter voter = voterRepository.findById(id)
                 .orElseThrow(() -> new VoterNotFoundException("Voter not found"));

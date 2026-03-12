@@ -1,5 +1,6 @@
-package com.kasprzak.kamil.VotingSystem;
+package com.kasprzak.kamil.VotingSystem.unit;
 
+import com.kasprzak.kamil.VotingSystem.GlobalExceptionHandler;
 import com.kasprzak.kamil.VotingSystem.dto.ErrorResponse;
 import com.kasprzak.kamil.VotingSystem.exceptions.*;
 import org.junit.jupiter.api.Test;

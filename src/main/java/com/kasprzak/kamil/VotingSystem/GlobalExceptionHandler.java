@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
-class GlobalExceptionHandler {
+public class GlobalExceptionHandler {
 
     @ExceptionHandler(ElectionNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleElectionNotFound (ElectionNotFoundException ex){

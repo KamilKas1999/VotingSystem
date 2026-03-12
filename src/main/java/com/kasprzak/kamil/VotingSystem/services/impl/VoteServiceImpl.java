@@ -1,6 +1,8 @@
 package com.kasprzak.kamil.VotingSystem.services.impl;
 
+import com.kasprzak.kamil.VotingSystem.dto.VoteDto;
 import com.kasprzak.kamil.VotingSystem.dto.VoteRequestDto;
+import com.kasprzak.kamil.VotingSystem.dto.VoterDto;
 import com.kasprzak.kamil.VotingSystem.entities.Election;
 import com.kasprzak.kamil.VotingSystem.entities.Vote;
 import com.kasprzak.kamil.VotingSystem.entities.VoteOption;
@@ -12,6 +14,8 @@ import com.kasprzak.kamil.VotingSystem.repositories.VoteRepository;
 import com.kasprzak.kamil.VotingSystem.repositories.VoterRepository;
 import com.kasprzak.kamil.VotingSystem.services.VoteService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,6 +50,20 @@ public class VoteServiceImpl implements VoteService {
                 .build();
 
         voteRepository.save(vote);
+    }
+
+    @Override
+    public Page<VoteDto> getAllVotes(Pageable pageable) {
+        return voteRepository.findAll(pageable)
+                .map(this::buildVoteDto);
+    }
+
+    private VoteDto buildVoteDto(Vote vote){
+        return VoteDto.builder()
+                .voterName(vote.getVoter().getName())
+                .electionName(vote.getElection().getName())
+                .optionName(vote.getOption().getName())
+                .build();
     }
 
     private void validateIfUserAlreadyVote(Long voterId, Long electionId) {

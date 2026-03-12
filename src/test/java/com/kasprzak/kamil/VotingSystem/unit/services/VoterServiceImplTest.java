@@ -1,10 +1,11 @@
-package com.kasprzak.kamil.VotingSystem.services.impl;
+package com.kasprzak.kamil.VotingSystem.unit.services;
 
 import com.kasprzak.kamil.VotingSystem.dto.CreateVoterDto;
 import com.kasprzak.kamil.VotingSystem.dto.VoterDto;
 import com.kasprzak.kamil.VotingSystem.entities.Voter;
 import com.kasprzak.kamil.VotingSystem.exceptions.VoterNotFoundException;
 import com.kasprzak.kamil.VotingSystem.repositories.VoterRepository;
+import com.kasprzak.kamil.VotingSystem.services.impl.VoterServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

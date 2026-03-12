@@ -1,5 +1,6 @@
-package com.kasprzak.kamil.VotingSystem.controllers;
+package com.kasprzak.kamil.VotingSystem.unit.controllers;
 
+import com.kasprzak.kamil.VotingSystem.controllers.VoteController;
 import com.kasprzak.kamil.VotingSystem.dto.VoteRequestDto;
 import com.kasprzak.kamil.VotingSystem.services.VoteService;
 import org.junit.jupiter.api.Test;

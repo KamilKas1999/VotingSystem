@@ -1,10 +1,11 @@
-package com.kasprzak.kamil.VotingSystem.services.impl;
+package com.kasprzak.kamil.VotingSystem.unit.services;
 
 import com.kasprzak.kamil.VotingSystem.dto.CreateElectionDto;
 import com.kasprzak.kamil.VotingSystem.dto.ElectionDto;
 import com.kasprzak.kamil.VotingSystem.entities.Election;
 import com.kasprzak.kamil.VotingSystem.entities.VoteOption;
 import com.kasprzak.kamil.VotingSystem.repositories.ElectionRepository;
+import com.kasprzak.kamil.VotingSystem.services.impl.ElectionServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

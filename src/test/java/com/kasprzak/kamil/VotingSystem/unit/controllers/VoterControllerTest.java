@@ -1,5 +1,6 @@
-package com.kasprzak.kamil.VotingSystem.controllers;
+package com.kasprzak.kamil.VotingSystem.unit.controllers;
 
+import com.kasprzak.kamil.VotingSystem.controllers.VoterController;
 import com.kasprzak.kamil.VotingSystem.dto.CreateVoterDto;
 import com.kasprzak.kamil.VotingSystem.dto.VoterDto;
 import com.kasprzak.kamil.VotingSystem.services.VoterService;
